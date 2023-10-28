@@ -25,9 +25,9 @@ async def on_message(message):
 
         # Conditionally construct the search URL based on whether a series is provided
         if series == name:
-            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}&login=NeroQue'
+            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}&login={login}]'
         else:
-            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}_({series})&login=NeroQue'
+            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}_({series})&login={login}'
 
         async with aiohttp.ClientSession() as session:
             async with session.get(search_url) as response:
