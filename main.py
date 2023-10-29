@@ -1,7 +1,7 @@
 import discord
 import aiohttp
 import random  # Import the random module
-from config import DANBOORU_API_KEY, BOT_TOKEN
+from config import DANBOORU_API_KEY, BOT_TOKEN, login
 
 
 intents = discord.Intents.all()
@@ -25,12 +25,15 @@ async def on_message(message):
 
         # Conditionally construct the search URL based on whether a series is provided
         if series == name:
-            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}&login={login}]'
+            search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}&login={login}'
+            print(search_url)
         else:
             search_url = f'https://danbooru.donmai.us/posts.json?api_key={DANBOORU_API_KEY}&limit=100&tags={name}_({series})&login={login}'
+            print(search_url)
 
         async with aiohttp.ClientSession() as session:
             async with session.get(search_url) as response:
+                print(response)
                 if response.status == 200:
                     data = await response.json()
                     if data:
